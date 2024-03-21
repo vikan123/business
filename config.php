@@ -23,8 +23,8 @@ class Config{
 
 
     //get single record from database
-    public function getSingleProduct($pid){
-        $query="SELECT * FROM product WHERE pid=$pid";
+    public function getSingleProduct($id){
+        $query="SELECT * FROM product WHERE pid=$id";
 
         $res=mysqli_query($this->conn,$query);
         return $res;
@@ -45,6 +45,36 @@ class Config{
         return $res;
     }
 
+    public function insertCustomerData($name,$phone,$purchase){
+        $query="INSERT INTO customer(name,phone,purchase) VALUES('$name','$phone','$purchase')";
+       $res = mysqli_query($this->conn,$query);
+
+       if($res){
+           // echo "Success";
+       }
+       else{
+           // echo "Error";
+       }
+       return $res;
+   }
+
+   public function insertOrderData($cid,$pid,$tamt){
+    $query="INSERT INTO order(ci,pid,tamt) VALUES('$cid','$pid','$tamt')";
+   $res = mysqli_query($this->conn,$query);
+
+   if($res){
+       // echo "Success";
+   }
+   else{
+       // echo "Error";
+   }
+   return $res;
+}
+
+
+
+
+
 
    //display student query from database
    public function getData(){
@@ -63,7 +93,7 @@ class Config{
 
    //delete student query from database
    public function deleteProduct($id){
-        $query="DELETE FROM product WHERE id=$id";
+        $query="DELETE FROM product WHERE pid=$id";
         $res=mysqli_query($this->conn,$query);
         print_r($res);
         return $res;
@@ -71,7 +101,7 @@ class Config{
 
    //update student query from database
    public function updateProduct($pid,$name,$price,$des){
-    $query="UPDATE product SET name='$name',price='$price','$des' WHERE pid=$pid";
+    $query="UPDATE product SET name='$name',price='$price','$des' WHERE pid=$id";
     $res=mysqli_query($this->conn,$query);
     return $res;
    }
